@@ -1,0 +1,7 @@
+.truncated-text {
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;    /* Hides the overflow */
+    text-overflow: ellipsis; /* Adds the ellipsis (...) */
+    width: 90%; /* You can adjust this value based on your layout */
+  }
+  
