@@ -16,7 +16,7 @@ const BlogTags = () => {
     return (
         <div>
             {tags && tags.map((tag) => {
-                return<Link to={`/blog/tag/${tag}/`} className="badge bg-primary" style={{marginRight:'2px',textDecoration:'none'}}>{tag}</Link>
+                return<Link to={`/tag/${tag}/`} className="badge bg-primary" style={{marginRight:'2px',textDecoration:'none'}}>{tag}</Link>
             })}           
         </div>
     )

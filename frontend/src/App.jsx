@@ -8,6 +8,7 @@ import Logout from './Pages/Logout'
 import Layout from './Components/Layouts/Layout'
 import PrivateRoute from './Components/PrivateRoute'
 // import Navbar from './Components/Navbar'
+import TagBlogList from './Pages/TagBlogList';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           </Route>
           <Route path='/:slug' element={<BlogDetails />} />
           <Route path='/' element={<Home />} />
+          <Route path='/tag/:tag_name' element={<TagBlogList />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
       </Route>

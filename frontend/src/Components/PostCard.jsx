@@ -2,6 +2,7 @@ import React from "react";
 import format from 'date-fns/format';
 import './PostCard.css';
 import { API_URL } from "../Utils";
+import { Link } from "react-router-dom";
 
 const PostCard = ({title, slug, content, banner, created_at, blog_url}) => {  
     const bannerUrl = `${API_URL}${banner}`;  
@@ -41,7 +42,7 @@ const PostCard = ({title, slug, content, banner, created_at, blog_url}) => {
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><a href={blog_url}>{title}</a></h5>
+                        <h5 class="card-title"><Link to={`/${blog_url}`}>{title}</Link></h5>
                         <p class="card-text truncated-text" >
                             {content}
                         </p>

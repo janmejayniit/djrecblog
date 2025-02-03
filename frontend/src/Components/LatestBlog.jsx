@@ -20,7 +20,7 @@ const LatestBlog = ({action}) => {
                 {blogs.map((blog) => {
                     return (
                         <li key={blog.id} className="list-group-item">
-                            <Link to={`/${blog.slug}/`} onClick={action}>{blog.title}</Link>
+                            <Link to={`/${blog.slug}/`} onClick={action} style={{textDecoration:'none'}}>{blog.title}</Link>
                         </li>
                     );
                 })}

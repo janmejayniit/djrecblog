@@ -5,7 +5,6 @@ import AddComment from "../Components/AddComment";
 import CommentList from "../Components/CommentList";
 import BlogTags from "../Components/BlogTags";
 import LatestBlog from "../Components/LatestBlog";
-import  './CommentList.css';
 import { API_URL } from "../Utils";
 
 const BlogDetails = () => {
