@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import AddComment from "../Components/AddComment";
 import CommentList from "../Components/CommentList";
+import BlogTags from "../Components/BlogTags";
+import LatestBlog from "../Components/LatestBlog";
 import  './CommentList.css';
 import { API_URL } from "../Utils";
 
@@ -24,6 +26,7 @@ const BlogDetails = () => {
     
     useEffect(() => {   
         fetchBlog();
+        document.title = `Blog - ${slug}`;
     }, [])
 
     return (
@@ -56,12 +59,15 @@ const BlogDetails = () => {
                         <div className="col-md-4">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">Related Posts</h5>
-                                    <ul className="list-group">
-                                        <li className="list-group-item">Post 1</li>
-                                        <li className="list-group-item">Post 2</li>
-                                        <li className="list-group-item">Post 3</li>
-                                    </ul>
+                                    <h5 className="card-title">Latest Posts</h5>
+                                    <LatestBlog action={fetchBlog}/>
+                                </div>
+                            </div>
+
+                            <div className="card mt-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Categories</h5>
+                                    <BlogTags/>
                                 </div>
                             </div>
                         </div>
