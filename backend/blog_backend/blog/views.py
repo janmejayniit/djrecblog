@@ -7,15 +7,29 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User as AuthUser
 from users.models import CustomUser
+from rest_framework.pagination import PageNumberPagination
 
 
 # Create your views here.
 
+class PostPagination(PageNumberPagination):
+    page_size = 10  # Number of posts per page
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 @api_view(['GET'])
 def getPosts(request):
+    # posts = Post.objects.all().order_by('-created_at')
+    # serializer = PostSerializer(posts, many=True)
+    # return Response(serializer.data, status=status.HTTP_200_OK)
     posts = Post.objects.all().order_by('-created_at')
-    serializer = PostSerializer(posts, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    paginator = PostPagination()
+    paginated_posts = paginator.paginate_queryset(posts, request)
+    serializer = PostSerializer(paginated_posts, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+
+
 
 @api_view(['GET'])
 def getTags(request):
@@ -32,8 +46,13 @@ def getTags(request):
 def getPostsByTag(request, tag):
     try:
         posts = Post.objects.filter(tags__contains=tag)
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # serializer = PostSerializer(posts, many=True)
+        # return Response(serializer.data, status=status.HTTP_200_OK)
+        paginator = PostPagination()
+        paginated_posts = paginator.paginate_queryset(posts, request)
+        serializer = PostSerializer(paginated_posts, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
     except Post.DoesNotExist:
         return Response({"error": "Posts not found"}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
