@@ -8,6 +8,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth.models import User as AuthUser
 from users.models import CustomUser
 
+
 # Create your views here.
 
 @api_view(['GET'])
@@ -16,9 +17,41 @@ def getPosts(request):
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def getTags(request):
+    try:
+        tags = Post.objects.all().values_list('tags', flat=True).distinct()
+        tags_list = set(tag.strip() for sublist in tags for tag in sublist.split(','))
+        return Response(list(tags_list), status=status.HTTP_200_OK)
+    except Post.DoesNotExist:
+        return Response({"error": "Posts not found"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def getPostsByTag(request, tag):
+    try:
+        posts = Post.objects.filter(tags__contains=tag)
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Post.DoesNotExist:
+        return Response({"error": "Posts not found"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def latestPosts(request):
+    try:
+        posts = Post.objects.all().order_by('-created_at')[:5]
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Post.DoesNotExist:
+        return Response({"error": "Posts not found"}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 @api_view(['POST'])
 def createPost(request):
-    print(request.data)
     user = CustomUser.objects.get(id=request.data['user'])
     serializer = PostSerializer(data=request.data, context={'user': user})
     if serializer.is_valid(raise_exception=True):
@@ -69,3 +102,20 @@ def getComments(request, slug):
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def add_fake_blogs(request):
+    from faker import Faker
+    fake = Faker()
+    user = CustomUser.objects.get(id=8)
+    for _ in range(100):  # Adjust the range for the number of records you want
+        # Example of creating tags using random words or any other approach
+        tags = [fake.word() for _ in range(3)]  # You can create a list of 3 random words for tags
+        
+        Post.objects.create(
+            user=user,
+            title=fake.sentence(),  # Use sentence() for title (you can also use title() if you prefer)
+            banner='blog/banner/happy-woman-looking-trips-internet.jpg',  # Assuming this is a static path
+            content=fake.text(),  # Use text() to generate long-form content
+            tags=', '.join(tags)  # Assuming your model stores tags as a list or a string (modify as needed)
+        )
+    return Response(status=status.HTTP_200_OK)

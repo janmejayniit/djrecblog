@@ -17,8 +17,7 @@ def register(request):
 @api_view(['POST'])
 def login(request):
     if request.method == 'POST':
-        try:
-             
+        try:     
             email = request.data.get('email')
             password = request.data.get('password')
             user = CustomUser.objects.get(email=email)
@@ -27,7 +26,7 @@ def login(request):
             else:
                 return Response({'error': 'User not found'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': 'SQL Error {}'.format(str(e))}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error':format(str(e))}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
         return Response({'error': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
 
