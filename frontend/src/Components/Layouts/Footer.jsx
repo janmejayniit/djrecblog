@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer class="bg-dark text-white mt-5">
+        <footer class="bg-dark text-white mt-3">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h5>About Us</h5>
+          <h5 className="mb-2">About Us</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
         </div>
         <div class="col-md-4">

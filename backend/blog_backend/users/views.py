@@ -31,15 +31,18 @@ def login(request):
         return Response({'error': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def profile(request):
-    if request.method == 'GET':
-        user = request.user
+def profile(request, email):
+    try:
+        user = CustomUser.objects.get(email=email)
         return Response(CustomUserSerializer(user).data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error':format(str(e))}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['PUT'])
 def updateProfile(request):
     if request.method == 'PUT':
-        user = request.user
+        email = request.data.get('email')
+        user = CustomUser.objects.get(email=email)
         serializer = CustomUserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
