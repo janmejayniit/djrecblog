@@ -26,7 +26,7 @@ const BlogDetails = () => {
     useEffect(() => {   
         fetchBlog();
         document.title = `Blog - ${slug}`;
-    }, [])
+    }, [slug])
 
     return (
         <div className="container mt-3">
@@ -66,7 +66,7 @@ const BlogDetails = () => {
                             <div className="card mt-3">
                                 <div className="card-body">
                                     <h5 className="card-title">Categories</h5>
-                                    <BlogTags/>
+                                    <BlogTags onClick={fetchBlog}/>
                                 </div>
                             </div>
                         </div>

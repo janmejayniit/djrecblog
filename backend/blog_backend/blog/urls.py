@@ -1,12 +1,13 @@
 from django.urls import path
 from .views import (getPosts, createPost, post_detail, updatePost,
-deletePost, addComment, getComments, getTags, latestPosts, getPostsByTag, add_fake_blogs)
+deletePost, addComment, getComments, getTags, latestPosts, getPostsByTag, add_fake_blogs, getPostsByDate)
 
 urlpatterns = [
     path('blog/',getPosts, name='getPosts'),
     path('blog/tags/',getTags, name='getTags'),
     path('blog/latest/',latestPosts, name='latestPosts'),
     path('blog/tag/<str:tag>/', getPostsByTag, name='getPostsByTag'),
+    path('blog/date/<str:date>/', getPostsByDate, name='getPostsByDate'),
     path('blog/add/',createPost, name='createPost'),    
     path('blog/<str:slug>/', post_detail, name='post_detail'),
     path('blog/update/<str:slug>',updatePost, name='updatePost'),    

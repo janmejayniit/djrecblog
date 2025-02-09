@@ -1,18 +1,22 @@
 import { React, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { API_URL } from "../Utils";
 
-const LatestBlog = ({action}) => {
-  const [blogs, setBlogs] = useState([]);
-
+const LatestBlog = () => {
+    const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate();
     const fetchBlogs = async () => {
         const response = await fetch(`${API_URL}blog/latest`);
         const data = await response.json();
         setBlogs(data);
-        }
+    }
+    const handlelatestBlogClick = (slug) => {
+        navigate(`/${slug}/`);
+    };
     useEffect(() => {
         fetchBlogs();
-    }, []);
+    }, [handlelatestBlogClick]);
+
 
     return (
         <>
@@ -20,7 +24,11 @@ const LatestBlog = ({action}) => {
                 {blogs.map((blog) => {
                     return (
                         <li key={blog.id} className="list-group-item">
-                            <Link to={`/${blog.slug}/`} onClick={action} style={{textDecoration:'none'}}>{blog.title}</Link>
+                            <a href="javascript:;"
+                               onClick={() => handlelatestBlogClick(blog.slug)}
+                               style={{textDecoration:'none'}}>
+                                {blog.title}
+                            </a>
                         </li>
                     );
                 })}

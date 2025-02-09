@@ -51,3 +51,33 @@
     border: 0;
     margin-bottom: 1rem;
 } */
+
+
+
+.profile-info {
+    position: relative;
+  }
+  
+  .edit-icon {
+    background-color: rgba(225, 232, 238, 0.5);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .edit-icon {
+      right: 5px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .edit-icon {
+      right: 2px;
+      font-size: 12px;
+    }
+  }

@@ -59,6 +59,28 @@ def getPostsByTag(request, tag):
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
+def getPostsByDate(request, date):
+    from datetime import datetime
+
+    # Example date string
+    # date_string = date
+    # date_object = datetime.strptime(date_string, '%a %b %d %Y %H:%M:%S %Z%z (%Z)')
+    # formatted_date = date_object.strftime('%Y-%m-%d')
+    # print(formatted_date) 
+
+    posts = Post.objects.filter(created_at__date=date)
+    
+    # Get the raw SQL query
+    # raw_sql_query = str(posts.query)
+    # print(raw_sql_query)
+        
+    paginator = PostPagination()
+    paginated_posts = paginator.paginate_queryset(posts, request)
+    serializer = PostSerializer(paginated_posts, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['GET'])
 def latestPosts(request):
     try:
         posts = Post.objects.all().order_by('-created_at')[:5]

@@ -87,8 +87,8 @@ const UpdateProfile = () =>{
                                     ) : (
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" />
                                     )}
-                                    <div >
-                                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i className='fa fa-pencil'></i> </a>
+                                    <div className='profile-info'>
+                                        <a href="javascript:;" className='edit-icon' data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i className='fa fa-pencil'></i> </a>
                                     </div> 
                                     </div>
                                     <h5 className="user-name">{user.first_name} {user.last_name}</h5>

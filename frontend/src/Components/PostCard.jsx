@@ -3,8 +3,9 @@ import format from 'date-fns/format';
 import './PostCard.css';
 import { API_URL } from "../Utils";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-const PostCard = ({title, slug, content, banner, created_at, blog_url}) => {  
+const PostCard = ({title, content, banner, created_at, blog_url}) => {
     const bannerUrl = `${API_URL}${banner}`;  
     return (
         <>
@@ -35,18 +36,18 @@ const PostCard = ({title, slug, content, banner, created_at, blog_url}) => {
 
 
 
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
+            <div className="card mb-3">
+                <div className="row g-0">
+                    <div className="col-md-4">
                         <img src={bannerUrl} className="card-img-top" alt={title} />
                     </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><Link to={`/${blog_url}`}>{title}</Link></h5>
-                        <p class="card-text truncated-text" >
+                    <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title"><Link to={`/${blog_url}`}>{title}</Link></h5>
+                        <p className="card-text truncated-text" >
                             {content}
                         </p>
-                        <p class="card-text text-sm"><small class="text-body-secondary">{format(created_at, 'yyyy-mm-dd hh:mm:ss')}</small></p>
+                        <p className="card-text text-sm"><small className="text-body-secondary">{format(created_at, 'yyyy-MM-dd hh:mm:ss')}</small></p>
                     </div>
                     </div>
                 </div>
@@ -54,5 +55,13 @@ const PostCard = ({title, slug, content, banner, created_at, blog_url}) => {
         </>
     )    
 }
-
+PostCard.propTypes = {
+    // id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    // slug: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    banner: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    blog_url: PropTypes.string.isRequired,
+};
 export default PostCard;
