@@ -13,16 +13,20 @@ const Login = () => {
         try{
             const response = await axios.post(`${API_URL}user/login/`, loginData)
             const data = await response.data;
-            console.log(data.email)
             if(data){
 
-                localStorage.setItem('email', data.email)
-                localStorage.setItem('id', data.id)
-                localStorage.setItem('first_name', data.first_name) 
-                localStorage.setItem('last_name', data.last_name)
-                localStorage.setItem('avatar', data.avatar)   
-                
-                navigate("/add")
+                localStorage.setItem('email', data.user.email)
+                localStorage.setItem('id', data.user.id)
+                localStorage.setItem('first_name', data.user.first_name)
+                localStorage.setItem('last_name', data.user.last_name)
+                localStorage.setItem('phone_number', data.user.phone_number)
+                localStorage.setItem('avatar', data.user.avatar)
+                localStorage.setItem('address', data.user.address)
+                localStorage.setItem('bio', data.user.bio)
+                localStorage.setItem('access_token', data.access_token)
+                localStorage.setItem('refresh_token', data.refresh_token)
+
+                navigate("/profile")
 
             }
             

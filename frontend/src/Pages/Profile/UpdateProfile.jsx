@@ -17,6 +17,7 @@ const UpdateProfile = () =>{
                 const response = await axios.put(`${API_URL}user/updateProfile/`,formData,{
                     headers: {
                         'Content-Type': 'multipart/form-data',
+                        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
                     },
                 });
                 if(response.data){
@@ -42,7 +43,11 @@ const UpdateProfile = () =>{
             formData.append('email', localStorage.getItem('email'));
             
 
-            const response = await axios.put(`${API_URL}user/updateProfile/`,formData);
+            const response = await axios.put(`${API_URL}user/updateProfile/`,formData,{
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                }
+            });
             console.log(response.data);
             if(response.data){
                 setUser(response.data)
@@ -66,6 +71,7 @@ const UpdateProfile = () =>{
                 address:localStorage.getItem('address')?localStorage.getItem('address'):'', 
                 bio:localStorage.getItem('bio')?localStorage.getItem('bio'):'', 
                 avatar:localStorage.getItem('avatar')?localStorage.getItem('avatar'):'', 
+                email:localStorage.getItem('email')?localStorage.getItem('email'):'',
             }
         )
        
