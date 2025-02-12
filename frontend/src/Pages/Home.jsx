@@ -38,13 +38,26 @@ const Home = () => {
     // }, [])
     const [date, setDate] = useState(new Date());
 
+    const getDate = (str) => {
+        if (str !== undefined) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        } else {
+            return "";
+        }
+    }
+
     const getPostsByDate = async (newDate) => {
         try {
             setDate(newDate);
-            const dateObject = new Date(newDate);
 
-            const formattedDate = dateObject.toISOString().split('T')[0];
+            // const dateObject = new Date(newDate);
+            const formattedDate = getDate(newDate);
 
+            // const formattedDate = dateObject.toISOString().split('T')[0];
+            console.log(formattedDate);
             const response = await axios.get(`${API_URL}blog/date/${formattedDate}`);
             setBlogs(response.data.results);
             const total_pages = response.data.count>10?response.data.count/10:0;
