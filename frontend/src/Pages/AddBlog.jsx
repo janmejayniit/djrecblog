@@ -5,9 +5,10 @@ import { ClassicEditor, Essentials, Paragraph, Bold, Italic, Link ,Indent,
     IndentBlock, BlockQuote, Font, FontFamily, Strikethrough, Subscript, Superscript, Code,
     Heading,FontSize, List, ListProperties, MediaEmbed} from 'ckeditor5';
 
+import { useTranslation } from 'react-i18next';
 
-
-const AddBlog = () => { 
+const AddBlog = () => {
+    const {t}= useTranslation();
 
     const [blogForm, setBlogForm] = useState({'title':'', 'tags':'', 'content':'', 'banner':'','user':''}); 
 
@@ -55,20 +56,20 @@ const AddBlog = () => {
                 <div className="card-body">
                     <form onSubmit={handleFormChange}>     
                         <div className="mb-3">
-                            <label className="form-label">Title</label>
+                            <label className="form-label">{t("Title")}</label>
                             <input type="text" className="form-control" value={blogForm.title} onChange={(e)=>setBlogForm(prevblogForm => ({...prevblogForm,title: e.target.value}))} />     
                         </div>
                         <div className="mb-3">
-                            <label  className="form-label">Banner</label>
+                            <label  className="form-label">{t("Banner")}</label>
                             <input type="file" className="form-control" onChange={(e)=>setBlogForm(prevblogForm=> ({...prevblogForm,banner: e.target.files[0]}))}/>
                         </div>
                         <div className="mb-3">
-                            <label  className="form-label">Tags</label>
+                            <label  className="form-label">{t("Tags")}</label>
                             <input type="text" className="form-control" value={blogForm.tags} onChange={(e)=>setBlogForm(prevblogForm=> ({...prevblogForm,tags: e.target.value}))}/>
                         </div>
                          
                         <div className="mb-3">
-                        <label className="form-label">Content</label>
+                        <label className="form-label">{t("Content")}</label>
                         <CKEditor
                             editor={ ClassicEditor }
                             config={ {
@@ -115,7 +116,7 @@ const AddBlog = () => {
                         
 
                         
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-dark btn-sm">{t("Submit")}</button>
                     </form>
                 </div>
             </div>

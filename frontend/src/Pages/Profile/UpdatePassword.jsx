@@ -1,9 +1,10 @@
 import React from 'react';
 import { API_URL } from '../../Utils';
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 const UpdatePassword = () =>{
-
+    const {t} = useTranslation();
     const [passwordFormData, setPasswordFormData] = React.useState({'oldPassword':'','newPassword':'', confirmPassword:''});
 
     const updatePassword = async  (e) =>{
@@ -37,7 +38,7 @@ const UpdatePassword = () =>{
                 <div className='col-md-6'>
                     <div className='card'>
                         <div className='card-header'>
-                            <h5>Update your password</h5>
+                            <h5>{t("Update your password")}</h5>
                         </div>
                         <div className='card-body'>
                             <form onSubmit={updatePassword}>
@@ -45,21 +46,21 @@ const UpdatePassword = () =>{
                                     <input type="password" className="form-control" id=" "
                                            value={passwordFormData.oldpassword}
                                            onChange={(e)=>setPasswordFormData({...passwordFormData,oldPassword: e.target.value})}
-                                           placeholder="Enter your old password"/>
+                                           placeholder={t("Enter your old password")}/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <input type="password" className="form-control" id=" "
                                            value={passwordFormData.newpassword}
                                            onChange={(e)=>setPasswordFormData({...passwordFormData,newPassword: e.target.value})}
-                                           placeholder="Enter your new password"/>
+                                           placeholder={t("Enter your new password")}/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <input type="password" className="form-control" id=" "
                                            value={passwordFormData.confirmPassword}
                                            onChange={(e)=>setPasswordFormData({...passwordFormData,confirmPassword: e.target.value})}
-                                           placeholder="Confirm your password"/>
+                                           placeholder={t("Confirm your password")}/>
                                 </div>         
-                                <button type="submit" className="btn btn-dark btn-sm">Update</button>
+                                <button type="submit" className="btn btn-dark btn-sm">{t("Update")}</button>
                             </form>
                         </div>
                     </div> 

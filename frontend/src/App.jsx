@@ -10,6 +10,8 @@ import PrivateRoute from './Components/PrivateRoute'
 import TagBlogList from './Pages/TagBlogList'
 import UpdateProfile from './Pages/Profile/UpdateProfile'
 import UpdatePassword from './Pages/Profile/UpdatePassword'
+import './i18n.js'; // Import the i18n configuration
+import LanguageSelector from './LanguageSelector.jsx';
 
 
 function App() {
@@ -33,7 +35,8 @@ function App() {
     )
   )
   return (
-    <> 
+    <>
+        <LanguageSelector />
       <RouterProvider router={router} />
     </>
   )

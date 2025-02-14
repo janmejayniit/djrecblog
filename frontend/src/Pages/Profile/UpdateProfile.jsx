@@ -1,9 +1,11 @@
-import {React, useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { API_URL } from '../../Utils';
 import axios from "axios";
 import './UserProfile.css';
+import { useTranslation } from 'react-i18next';
 
 const UpdateProfile = () =>{
+    const {t}= useTranslation();
 
     const [user, setUser] = useState({first_name:'', last_name:'', phone_number:'', address:'',bio:'',avatar:''});
 
@@ -89,9 +91,9 @@ const UpdateProfile = () =>{
                                     <div className="user-avatar">
                                         
                                     {user.avatar ? (
-                                    <img src={`${API_URL}${user.avatar}`} alt="Maxwell Admin" />
+                                    <img src={`${API_URL}${user.avatar}`} alt={user.first_name} />
                                     ) : (
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" />
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt={user.first_name} />
                                     )}
                                     <div className='profile-info'>
                                         <a href="javascript:;" className='edit-icon' data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i className='fa fa-pencil'></i> </a>
@@ -119,16 +121,17 @@ const UpdateProfile = () =>{
                                 <div className="form-group mb-3">
                                     <div className="row">
                                         <div className="col">
-                                            <input type="text" className="form-control" 
-                                            value={user.first_name}
-                                            onChange={(e)=>setUser((preUser=>({...preUser,first_name: e.target.value})))}
-                                            placeholder="First name" aria-label="First name"/>
+                                            <input type="text" className="form-control"
+                                                value={user.first_name}
+                                                onChange={(e)=>setUser((preUser=>({...preUser,first_name: e.target.value})))}
+                                            placeholder={t("First Name")}
+                                                   />
                                         </div>
                                         <div className="col">
                                             <input type="text" className="form-control" 
                                             value={user.last_name} 
                                             onChange={(e)=>setUser((preUser=>({...preUser,last_name:e.target.value})))}
-                                            placeholder="Last name" aria-label="Last name"/>
+                                            placeholder={t("Last Name")}/>
                                         </div>
                                     </div>
                                 </div>
@@ -137,19 +140,21 @@ const UpdateProfile = () =>{
                                     <input type="tel" className="form-control" id="phone" 
                                     value={user.phone_number} 
                                     onChange={(e)=>setUser(preUser=>({...preUser,phone_number:e.target.value}))}
-                                    placeholder="Enter your phone number"/>
+                                    placeholder={t("Write your phone number")}/>
                                 </div>
                                 <div className="form-group mb-3">
                                     <textarea className="form-control" id="address" 
-                                    placeholder="Enter your address" 
+                                    placeholder={t("Write your address")}
                                     value={user.address}
                                     onChange={(e)=>setUser(preUser=>({...preUser,address:e.target.value}))}
                                     ></textarea>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <textarea className="form-control" id="bio" placeholder="Enter your bio" 
-                                    value={user.bio}
-                                    onChange={(e)=>setUser(preUser=>({...preUser,bio:e.target.value}))}
+                                    <textarea
+                                        className="form-control" id="bio"
+                                        placeholder={t("Write about yourself")}
+                                        value={user.bio}
+                                        onChange={(e)=>setUser(preUser=>({...preUser,bio:e.target.value}))}
                                     ></textarea>
                                 </div>
                                 {/* <div className="form-group mb-3">
@@ -158,7 +163,7 @@ const UpdateProfile = () =>{
                                     onChange={(e)=>setUser(preUser=> ({...preUser,avatar: e.target.files[0]}))}
                                     placeholder='Profile Picture'/>
                                 </div> */}
-                                <button type="submit" className="btn btn-dark btn-sm">Update</button>
+                                <button type="submit" className="btn btn-dark btn-sm">{t("Update")}</button>
                             </form> 
                         </div>
                     </div>

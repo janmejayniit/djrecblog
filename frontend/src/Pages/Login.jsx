@@ -2,8 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from "../Utils";
+import { useTranslation } from 'react-i18next';
 
-const Login = () => {   
+const Login = () => {
+    const { t } = useTranslation();
 
     const [loginData, setLoginData] = React.useState({email: '', password: ''})
     const navigate = useNavigate();
@@ -44,21 +46,21 @@ const Login = () => {
                 <div className="col-md-6 offset-md-3">
                     <div className="card">
                         <div className="card-header">
-                            Login
+                            {t('Login')}
                         </div>
                         <div className="card-body">
                             <form onSubmit={handleLogin}>
                                 <div className="form-group mb-3">
-                                    <label htmlFor="email">Email</label>
+                                    <label htmlFor="email">{t('Email')}</label>
                                     <input type="text" className="form-control" id="email" value={loginData.email} onChange={(e)=>setLoginData(prevData=>({...prevData,email:e.target.value}))} />
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label htmlFor="password">Password</label>
+                                    <label htmlFor="password">{t('Password')}</label>
                                     <input type="password" className="form-control" id="password" value={loginData.password} onChange={(e)=>setLoginData(prevData=>({...prevData,password:e.target.value}))} />
                                 </div>
-                                <button type="submit" className="btn btn-primary">Login</button>
+                                <button type="submit" className="btn btn-dark btn-sm">{t('Login')}</button>
                                 <p className="text-center mt-2">
-                                    if you have not account please <a href="/register">Register</a>
+                                    {t('if you have not account please')} <a href="/register">{t('Register')}</a>
                                 </p>
                             </form>
                         </div>

@@ -7,8 +7,9 @@ import BlogTags from "../Components/BlogTags";
 import LatestBlog from "../Components/LatestBlog";
 import { API_URL } from "../Utils";
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon} from "react-share"
-
+import { useTranslation } from 'react-i18next';
 const BlogDetails = () => {
+    const {t} = useTranslation();
     const { slug } = useParams();
     const [blog, setBlog] = React.useState();
     const fetchBlog = async () => {
@@ -78,14 +79,14 @@ const BlogDetails = () => {
                         <div className="col-md-4">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">Latest Posts</h5>
+                                    <h5 className="card-title">{t("Latest Posts")}</h5>
                                     <LatestBlog action={fetchBlog}/>
                                 </div>
                             </div>
 
                             <div className="card mt-3">
                                 <div className="card-body">
-                                    <h5 className="card-title">Categories</h5>
+                                    <h5 className="card-title">{t("Categories")}</h5>
                                     <BlogTags onClick={fetchBlog}/>
                                 </div>
                             </div>

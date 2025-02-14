@@ -1,35 +1,37 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
     return (
-        <footer class="bg-dark text-white mt-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h5 className="mb-2">About Us</h5>
+        <footer className="bg-dark text-white mt-3">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-4">
+          <h5 className="mb-2">{t("About Us")}</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
         </div>
-        <div class="col-md-4">
-          <h5>Quick Links</h5>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Home</a></li>
-            <li><a href="#" class="text-white">About</a></li>
-            <li><a href="#" class="text-white">Services</a></li>
-            <li><a href="#" class="text-white">Contact</a></li>
+        <div className="col-md-4">
+          <h5>{t("Quick Links")}</h5>
+          <ul className="list-unstyled">
+            <li><a href="#" className="text-white">{t('Home')}</a></li>
+            <li><a href="#" className="text-white">{t('About')}</a></li>
+            <li><a href="#" className="text-white">{t('Services')}</a></li>
+            <li><a href="#" className="text-white">{t('Contact')}</a></li>
           </ul>
         </div>
-        <div class="col-md-4">
-          <h5>Contact Us</h5>
-          <ul class="list-unstyled">
-            <li><a href="mailto:info@example.com" class="text-white">info@example.com</a></li>
-            <li><a href="tel:+1234567890" class="text-white">+123 456 7890</a></li>
-            <li><a href="#" class="text-white">1234 Street Name, City, Country</a></li>
+        <div className="col-md-4">
+          <h5>{t("Contact Us")}</h5>
+          <ul className="list-unstyled">
+            <li><a href="mailto:info@example.com" className="text-white">info@example.com</a></li>
+            <li><a href="tel:+1234567890" className="text-white">+123 456 7890</a></li>
+            <li><a href="#" className="text-white">1234 Street Name, City, Country</a></li>
           </ul>
         </div>
       </div>
-      <div class="row mt-3">
-        <div class="col text-center">
-          <p>&copy; 2025 Your Company. All rights reserved.</p>
+      <div className="row mt-3">
+        <div className="col text-center">
+          <p>&copy; 2025 Your Company. {t("All rights reserved")}.</p>
         </div>
       </div>
     </div>
